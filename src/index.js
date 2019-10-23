@@ -9,6 +9,7 @@ import App from './Home/App'
 import Login from './Login/login';
 import homeA from './Administrador/homeA';
 import cadastro from './Cadastro/cadastro';
+import categorias from './Categorias/categorias';
 
 //routes
 
@@ -38,7 +39,10 @@ const routing =(
 
                 <RotaPrivada path='/homeA' component={homeA} /> 
 
-                <Route  path='/cadastro' component= {cadastro}/>               
+                <Route path='/cadastro' component={cadastro} /> 
+
+                <RotaPrivada  path='/categorias' component= {categorias}/>   
+
 
                 </Switch>
         </div>

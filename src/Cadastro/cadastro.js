@@ -19,12 +19,16 @@ export default class cadastro extends Component {
         }
     }
 
-    mudarEstadoTitulo = (event) =>{
-        this.setState({titulo: event.target.value})
+    mudarEstadoNome = (event) =>{
+        this.setState({nome: event.target.value})
     }
 
     mudarEstadoTipo = (event) =>{
         this.setState({tipo: event.target.value})
+    }
+
+    mudarEstadoCategoria = (event) =>{
+        this.setState({idCategoria: event.target.value})
     }
 
     mudarEstadoDuracao = (event) =>{
@@ -44,12 +48,11 @@ export default class cadastro extends Component {
     }
 
     direcionar = (event) => {
-        this.props.history.push('/homeA')
-
-    
-            Axios.post("http://localhost:5000/api/Login",{
-                titulo: this.state.titulo,
+        Axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem("usuario-opflix");
+            Axios.post("http://localhost:5000/api/Lancamento",{
+                nome: this.state.nome,
                 tipo: this.state.tipo,
+                idCategoria:this.state.idCategoria,
                 duracao: this.state.duracao,
                 data: this.state.data,
                 plataforma: this.state.plataforma,
@@ -58,8 +61,8 @@ export default class cadastro extends Component {
             })
              .then (data =>{
                  if(data.status === 200){
-                     localStorage.setItem("usuario-opflix", data.data.token);
-                     this.props.history.push('/homeA');
+                     
+                     this.props.history.push('/categorias');
                  }else{
                      console.log("errou");
                  }
@@ -69,8 +72,6 @@ export default class cadastro extends Component {
                 console.log(erro);
              })
         
-//aqui
-//passa de pagina mesmo com os campos vazios
     }
 
     render() {
@@ -79,8 +80,9 @@ export default class cadastro extends Component {
             <h1 className="cadastro">Cadastrar</h1>
             <div className="formulario">
 
-            <p>Título:</p><input type="text" name="titulo" id="titulo" onChange={this.mudarEstadoTitulo} ></input><br></br>
+            <p>Título:</p><input type="text" name="titulo" id="titulo" onChange={this.mudarEstadoNome} ></input><br></br>
             <p>Tipo(série/filme/etc.):</p><input type="text" name="tipo" id="tipo" onChange={this.mudarEstadoTipo} ></input><br></br>
+            <p>Categoria:</p><input type="int" name="categoria" id="categoria" onChange={this.mudarEstadoCategoria} ></input><br></br>
             <p>Duração:</p><input type="text" name="duracao" id="duracao" onChange={this.mudarEstadoDuracao} ></input><br></br>
             <p>Data de Lançamento:</p><input type="date" name="data" id="data" onChange={this.mudarEstadoData} ></input><br></br>
             <p>Plataforma:</p><input type="text" name="plataforma" id="plataforma" onChange={this.mudarEstadoPlataforma} ></input><br></br>

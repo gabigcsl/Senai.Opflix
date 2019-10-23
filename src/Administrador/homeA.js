@@ -14,7 +14,7 @@ render(){
         <h1>ADMINISTRADOR</h1>
         <h2>Lançamentos</h2>
         <div className="ce">
-        <button onClick = {this.direcionar}>Cadastrar e Editar</button>
+        <button onClick = {this.direcionar}>Cadastrar</button>
         </div>
 
         </div>
